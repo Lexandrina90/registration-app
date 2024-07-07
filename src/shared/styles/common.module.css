@@ -7,8 +7,13 @@
     justify-content: center;
     align-items: center;
     width: max-content;
-    height: 100vh;
-    gap: 202px;
+    height: 100%;
+    padding: 0;
+}
+
+.header {
+    margin-bottom: 202px;
+    padding-top: 24px;
 }
 
 body {
