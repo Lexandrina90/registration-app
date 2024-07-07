@@ -10,4 +10,6 @@ export const MESSAGES = {
     GENERIC_ERROR: 'Произошла ошибка. Пожалуйста, попробуйте снова.',
     REGISTER_BUTTON: 'Зарегистрироваться',
     LOADING: 'Загрузка...',
+    PASSWORD_MISSING: 'Все поля должны быть заполнены',
+    INVALID_CREDENTIAL: 'Неправильный e-mail или пароль'
 };

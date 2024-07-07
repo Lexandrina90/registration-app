@@ -9,17 +9,6 @@ const getUserData = (user) => ({
     photoURL: user.photoURL,
 });
 
-// export const registerUser = createAsyncThunk(
-//     'auth/registerUser',
-//     async ({email, password}, {rejectWithValue}) => {
-//         try {
-//             await createUserWithEmailAndPassword(email, password);
-//         } catch (error) {
-//             return rejectWithValue(error.message);
-//         }
-//     }
-// );
-
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async ({ email, password }, { rejectWithValue }) => {
@@ -44,19 +33,6 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-
-// export const loginUser = createAsyncThunk(
-//     'auth/loginUser',
-//     async ({ email, password }, { rejectWithValue }) => {
-//         try {
-//             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-//             return userCredential.user;
-//         } catch (error) {
-//             return rejectWithValue(error.message);
-//         }
-//     }
-// );
-
 const authSlice = createSlice({
     name: 'auth',
     initialState: { user: null, status: null, error: null},
@@ -64,6 +40,10 @@ const authSlice = createSlice({
         logout: (state) => {
             state.user = null;
         },
+
+        resetAuthStatus: (state) => {
+            state.status = 'idle';
+          }
     },
     extraReducers: (builder) => {
         builder
@@ -92,6 +72,6 @@ const authSlice = createSlice({
     },
 })
 
-export const { logout } = authSlice.actions;
+export const { logout, resetAuthStatus } = authSlice.actions;
 
 export default authSlice.reducer;

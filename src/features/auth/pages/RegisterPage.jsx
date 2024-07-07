@@ -1,25 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { TEXT } from '../../../constants/text-constants';
 
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import styles from './AuthPages.module.css';
 
 const RegisterPage = () => {
   return (
-    <div data-bs-theme="custom" className={styles['register-form-wrapper']}>
-        <div className={styles['register-form-container']}>
-            <h2>Регистрация</h2>
+    <div data-bs-theme="custom" className={styles['form-wrapper']}>
+        <div className={styles['form-container']}>
+            <h2>{TEXT.REGISTER.TITLE}</h2>
             <RegisterForm />
         </div>
         <p>
-            Уже зарегистрированы?
+            {TEXT.REGISTER.LOGIN_PROMPT}
             <Button 
                 variant="link" 
                 as={Link} 
                 to="/login"
             >
-                Войти
+                {TEXT.REGISTER.LOGIN_LINK}
             </Button>
         </p>
     </div>

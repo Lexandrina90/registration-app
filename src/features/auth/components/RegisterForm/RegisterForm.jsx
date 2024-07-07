@@ -10,11 +10,12 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { registerUser } from "../../authSlice";
-import styles from './RegisterForm.module.css';
+import { registerUser, resetAuthStatus } from "../../authSlice";
+import authStyles from '../../pages/AuthPages.module.css';
 import {LoaderIcon} from "../icons/LoaderIcon";
 import { MESSAGES } from "../../../../constants/messages";
 import { LABELS } from "../../../../constants/labels";
+import { TEXT } from "../../../../constants/text-constants";
 
 const schema = yup.object().shape({
     email: yup.string().required(MESSAGES.EMAIL_REQUIRED).email(MESSAGES.INVALID_EMAIL),
@@ -36,12 +37,10 @@ const RegisterForm = () => {
 
     const authStatus = useSelector((state) => state.auth.status);
     const authError = useSelector((state) => state.auth.error);
-    const user = useSelector((state) => state.auth.user);
 
     const onSubmit = (data) => {
        dispatch(registerUser({email: data.email, password: data.password}));
     };
-
 
     const getErrorMessage = (errorCode) => {
         switch (errorCode) {
@@ -55,26 +54,27 @@ const RegisterForm = () => {
     };
 
     React.useEffect(() => {
-        if (authStatus === 'succeeded' && user) {
-            navigate(`/user/${user.uid}`);
+        if (authStatus === 'succeeded') {
+            navigate(`/login`);
+            dispatch(resetAuthStatus()); 
         }
-    }, [authStatus, user, navigate]);
+    }, [authStatus, navigate]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={styles['register-form']}>
+        <form onSubmit={handleSubmit(onSubmit)} className={authStyles['form']}>
             <div className="mb-4">
                 <FloatingLabel
                     controlId="floatingEmail"
                     label="E-mail"
-                    className={styles['register-form-label']}
+                    className={authStyles['form-label']}
                 >
                     <Form.Control 
                         type="email" 
                         placeholder="E-mail" 
                         {...register('email')} 
                         isInvalid={!!errors.email}
-                        className={cn(styles['register-form-control'], {
-                            [styles['is-invalid']]: errors.email
+                        className={cn(authStyles['form-control'], {
+                            [authStyles['is-invalid']]: errors.email
                         })}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -86,15 +86,15 @@ const RegisterForm = () => {
                  <FloatingLabel
                     controlId="floatingPassword"
                     label={LABELS.CREATE_PASS}
-                    className={styles['register-form-label']}
+                    className={authStyles['form-label']}
                 >
                     <Form.Control 
                         type="password" 
                         placeholder={LABELS.CREATE_PASS} 
                         {...register('password')} 
                         isInvalid={!!errors.password}
-                        className={cn(styles['register-form-control'], {
-                            [styles['is-invalid']]: errors.password
+                        className={cn(authStyles['form-control'], {
+                            [authStyles['is-invalid']]: errors.password
                         })}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -106,15 +106,15 @@ const RegisterForm = () => {
                 <FloatingLabel
                     controlId="confirmPassword"
                     label={LABELS.REPEAT_PASS}
-                    className={styles['register-form-label']}
+                    className={authStyles['form-label']}
                 >
                     <Form.Control 
                         type="password" 
                         placeholder={LABELS.REPEAT_PASS} 
                         {...register('confirmPassword')} 
                         isInvalid={!!errors.confirmPassword}
-                        className={cn(styles['register-form-control'], {
-                            [styles['is-invalid']]: errors.confirmPassword
+                        className={cn(authStyles['form-control'], {
+                            [authStyles['is-invalid']]: errors.confirmPassword
                         })}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -125,19 +125,19 @@ const RegisterForm = () => {
             <Button 
                 type="submit" 
                 size="lg"
-                className={styles['register-button']}
+                className={authStyles['form-button']}
                 style={{ 
                     backgroundColor: "#00B627",  
                     borderColor: "#00B627" 
                 }}
             >
                {authStatus === 'loading' ? (
-                     <LoaderIcon className={styles['rotate-icon']} />
+                     <LoaderIcon className={authStyles['rotate-icon']} />
                 ) : (
-                    'Зарегистрироваться'
+                    TEXT.LOGIN.REGISTER_LINK
                 )}
             </Button>
-            <div className={styles['register-error']}>
+            <div className={authStyles['form-error']}>
                 {authError && <span>{getErrorMessage(authError)}</span>}
             </div>
         </form>

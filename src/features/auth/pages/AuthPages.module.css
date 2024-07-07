@@ -1,18 +1,18 @@
-.register-form-wrapper {
+.form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
 }
 
-.register-form-wrapper p {
+.form-wrapper p {
     font-family: "Inter", sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
 }
 
-.register-form-wrapper a {
+.form-wrapper a {
     padding: 12px 4px;
     font-family: "Inter", sans-serif;
     font-size: 14px;
@@ -22,7 +22,14 @@
     text-decoration: underline dotted #A2A2A8;
 }
 
-.register-form-container {
+.form {
+    width: 364px;
+    font-size: 16px !important;
+    line-height: 20px !important;
+}
+
+
+.form-container {
     padding: 48px;
     background-color: #fff;
     border-radius: 16px;
@@ -33,9 +40,65 @@
     gap: 36px;
 }
 
-.register-form-container h2 {
+.form-container h2 {
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
     margin-bottom: 0px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #A2A2A8;
+}
+
+.form-control {
+    color: #262636 !important;
+}
+
+.form-control:focus~label{
+    font-weight: 600;
+    font-size: 12px;
+    color: green;
+}
+
+.form-control:focus {
+    border-color:#6FD273 !important;
+    box-shadow: none !important;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: none !important;
+}
+
+.form-control.is-invalid:focus {
+    border-color: #dc3545 !important;
+}
+
+.form-button {
+    border-radius: 12px !important;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: #0C9E12 !important;
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-icon {
+    animation: rotateAnimation 1s linear infinite; 
+}
+
+.form-error {
+    margin-top: 24px;
+    color: #dc3545;
 }
