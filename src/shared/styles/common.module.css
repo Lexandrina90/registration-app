@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.App {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: 100vh;
+    gap: 202px;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #DFDFDF !important;
+    color: #262636;
+}
+
+[data-bs-theme="custom"] {
+    --bs-body-color: #BBBAC2;
+    --bs-body-color-rgb: #BBBAC2;
+    --bs-btn-bg: #00B627;
+    --bs-heading-color: #262636;
+    --bs-link-color: #262636;
+    --bs-link-hover-color: #00B627;
+}

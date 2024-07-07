@@ -1,0 +1,41 @@
+.register-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.register-form-wrapper p {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.register-form-wrapper a {
+    padding: 12px 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: none;
+    text-decoration: underline dotted #A2A2A8;
+}
+
+.register-form-container {
+    padding: 48px;
+    background-color: #fff;
+    border-radius: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+}
+
+.register-form-container h2 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 0px;
+}
