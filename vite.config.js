@@ -5,7 +5,7 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist',
+    outDir: 'build',
   },
   resolve: {
     alias: {
