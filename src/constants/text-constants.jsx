@@ -9,4 +9,9 @@ export const TEXT = {
         LOGIN_PROMPT: "Уже зарегистрированы?",
         LOGIN_LINK: "Войти",
     },
+    USER: {
+        DATA_CHANGE: 'Изменение данных',
+        LOG_OUT: 'Выйти',
+        SAVE_DATA: 'Сохранить',
+    }
 };

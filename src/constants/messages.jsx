@@ -11,5 +11,6 @@ export const MESSAGES = {
     REGISTER_BUTTON: 'Зарегистрироваться',
     LOADING: 'Загрузка...',
     PASSWORD_MISSING: 'Все поля должны быть заполнены',
-    INVALID_CREDENTIAL: 'Неправильный e-mail или пароль'
+    INVALID_CREDENTIAL: 'Неправильный e-mail или пароль',
+    VERIFY_EMAIL: 'Пожалуйста, укажите авторизованный E-mail'
 };

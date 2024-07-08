@@ -102,3 +102,15 @@
     margin-top: 24px;
     color: #dc3545;
 }
+
+.user-page {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-page-header {
+   align-self: center;
+   padding-left: 40px;
+   padding-right: 40px;
+} 

@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {auth} from '../../shared/lib/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword} from 'firebase/auth';
 
 const getUserData = (user) => ({
     uid: user.uid,
@@ -33,9 +33,42 @@ export const loginUser = createAsyncThunk(
     }
 );
 
+export const updateUserEmail = createAsyncThunk(
+    'user/updateUserEmail',
+    async ({ newEmail }, { rejectWithValue }) => {
+        try {
+            const user = auth.currentUser;
+            await updateEmail(user, newEmail);
+            return { newEmail };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const updateUserPassword = createAsyncThunk(
+    'user/updateUserPassword',
+    async ({ newPassword }, { getState, rejectWithValue }) => {
+        const state = getState();
+        const currentError = state.auth.emailUpdateError;
+
+        if (currentError) {
+            return rejectWithValue(currentError);
+        }
+        
+        try {
+            const user = auth.currentUser;
+            await updatePassword(user, newPassword);
+            return { newPassword };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { user: null, status: null, error: null},
+    initialState: { user: null, status: null, error: null, emailUpdateError: null},
     reducers: {
         logout: (state) => {
             state.user = null;
@@ -43,7 +76,9 @@ const authSlice = createSlice({
 
         resetAuthStatus: (state) => {
             state.status = 'idle';
-          }
+            state.error = null;
+            state.emailUpdateError = null;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -68,7 +103,31 @@ const authSlice = createSlice({
               .addCase(loginUser.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-              });
+              })
+              .addCase(updateUserEmail.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateUserEmail.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.email = action.payload.newEmail;
+                state.error = null;
+                state.emailUpdateError = null;
+            })
+            .addCase(updateUserEmail.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+                state.emailUpdateError = action.payload;
+            })
+            .addCase(updateUserPassword.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateUserPassword.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+            })
+            .addCase(updateUserPassword.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            });
     },
 })
 

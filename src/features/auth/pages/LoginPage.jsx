@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { useDispatch } from "react-redux";
 
 import LoginForm from '../components/LoginForm/LoginForm';
 import styles from './AuthPages.module.css';
 import { TEXT } from '../../../constants/text-constants';
+import { resetAuthStatus } from '../authSlice';
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
+
+    const handleResetAuthStatus = () => {
+        dispatch(resetAuthStatus());
+    };
+
     return (
         <div data-bs-theme="custom" className={styles['form-wrapper']}>
         <div className={styles['form-container']}>
@@ -18,7 +26,8 @@ const LoginPage = () => {
             <Button 
                 variant="link" 
                 as={Link} 
-                to="/login"
+                to="/"
+                onClick={handleResetAuthStatus}
             >
                 {TEXT.LOGIN.REGISTER_LINK}
             </Button>

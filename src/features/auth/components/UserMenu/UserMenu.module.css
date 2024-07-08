@@ -1,0 +1,12 @@
+.user-menu {
+    margin-top: -180px;
+    margin-bottom: 180px;
+    border-bottom: 1px solid #6FD273;
+    display: flex;
+}
+
+.user-menu-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

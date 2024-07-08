@@ -1,17 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { auth } from "../../../../shared/lib/firebase";
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { loginUser, resetAuthStatus } from "../../authSlice";
-// import styles from './LoginForm.module.css';
+import { updateUserEmail, updateUserPassword, resetAuthStatus, logout } from "../../authSlice";
 import authStyles from '../../pages/AuthPages.module.css';
 import {LoaderIcon} from "../icons/LoaderIcon";
 import { LABELS } from "../../../../constants/labels";
@@ -23,8 +23,8 @@ const schema = yup.object().shape({
     password: yup.string().required(MESSAGES.PASSWORD_REQUIRED).min(6, MESSAGES.PASSWORD_MIN_LENGTH),
 });
 
-const LoginForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+const ChangeDataForm = () => {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema)
     });
     const dispatch = useDispatch();
@@ -32,11 +32,27 @@ const LoginForm = () => {
 
     const authStatus = useSelector((state) => state.auth.status);
     const authError = useSelector((state) => state.auth.error);
-    const user = useSelector((state) => state.auth.user);
 
-    const onSubmit = (data) => {
-        dispatch(loginUser({ email: data.email, password: data.password }));
+    const onSubmit = async (data) => {
+        try {
+            if (data.email) {
+                await dispatch(updateUserEmail({ newEmail: data.email }));
+            }
+            if (data.password) {
+                await dispatch(updateUserPassword({ newPassword: data.password }));
+            } 
+        } catch (error) {
+            console.error('Failed to update user data:', error.message);
+        } 
     };
+
+    React.useEffect(() => {
+        if (authStatus === 'succeeded') {
+            dispatch(logout());
+            dispatch(resetAuthStatus()); 
+            navigate(`/login`);
+        }
+    }, [authStatus, navigate]);
 
     const getErrorMessage = (errorCode) => {
         switch (errorCode) {
@@ -44,17 +60,12 @@ const LoginForm = () => {
                 return MESSAGES.PASSWORD_MISSING;
             case 'Firebase: Error (auth/invalid-credential).':
                 return MESSAGES.INVALID_CREDENTIAL;
+            case 'Firebase: Please verify the new email before changing email. (auth/operation-not-allowed).':
+                return MESSAGES.VERIFY_EMAIL;
             default:
                 return MESSAGES.GENERIC_ERROR;
         }
     };
-
-    React.useEffect(() => {
-        if (authStatus === 'succeeded' && user) {
-            navigate(`/user/${user.uid}`);
-            dispatch(resetAuthStatus()); 
-        }
-    }, [authStatus, user, navigate]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={authStyles['form']}>
@@ -78,6 +89,8 @@ const LoginForm = () => {
                     </Form.Control.Feedback>
                 </FloatingLabel>
             </div>
+            
+
             <div className="mb-4">
                  <FloatingLabel
                     controlId="floatingPassword"
@@ -110,7 +123,7 @@ const LoginForm = () => {
                {authStatus === 'loading' ? (
                      <LoaderIcon className={authStyles['rotate-icon']} />
                 ) : (
-                    TEXT.REGISTER.LOGIN_LINK
+                    TEXT.USER.SAVE_DATA
                 )}
             </Button>
             <div className={authStyles['form-error']}>
@@ -121,4 +134,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+export default ChangeDataForm;

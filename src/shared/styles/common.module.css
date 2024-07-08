@@ -20,6 +20,7 @@ body {
     font-family: "Inter", sans-serif;
     background-color: #DFDFDF !important;
     color: #262636;
+    box-sizing: border-box;
 }
 
 [data-bs-theme="custom"] {
