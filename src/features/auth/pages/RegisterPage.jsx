@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import RegisterForm from '../components/RegisterForm/RegisterForm';
+import RegisterForm from '@/features/auth/components/RegisterForm/RegisterForm';
 import styles from './AuthPages.module.css';
-import { resetAuthStatus } from '../authSlice';
-import { TEXT } from '../../../constants/text-constants';
+import { resetAuthStatus } from '@/features/auth/authSlice';
+import { TEXT } from '@/constants/text-constants';
 
 const RegisterPage = () => {
     const dispatch = useDispatch();

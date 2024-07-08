@@ -5,18 +5,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { auth } from "../../../../shared/lib/firebase";
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { updateUserEmail, updateUserPassword, resetAuthStatus, logout } from "../../authSlice";
-import authStyles from '../../pages/AuthPages.module.css';
-import {LoaderIcon} from "../icons/LoaderIcon";
-import { LABELS } from "../../../../constants/labels";
-import { MESSAGES } from "../../../../constants/messages";
-import { TEXT } from "../../../../constants/text-constants";
+import { updateUserEmail, updateUserPassword, resetAuthStatus, logout } from "@/features/auth/authSlice";
+import authStyles from '@/features/auth/pages/AuthPages.module.css';
+import {LoaderIcon} from "@/features/auth/components/icons/LoaderIcon";
+import { LABELS } from "@/constants/labels";
+import { MESSAGES } from "@/constants/messages";
+import { TEXT } from "@/constants/text-constants";
 
 const schema = yup.object().shape({
     email: yup.string().required(MESSAGES.EMAIL_REQUIRED).email(MESSAGES.INVALID_EMAIL),

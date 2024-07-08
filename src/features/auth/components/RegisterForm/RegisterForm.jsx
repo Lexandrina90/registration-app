@@ -10,12 +10,12 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { registerUser, resetAuthStatus } from "../../authSlice";
-import authStyles from '../../pages/AuthPages.module.css';
-import {LoaderIcon} from "../icons/LoaderIcon";
-import { MESSAGES } from "../../../../constants/messages";
-import { LABELS } from "../../../../constants/labels";
-import { TEXT } from "../../../../constants/text-constants";
+import { registerUser, resetAuthStatus } from "@/features/auth/authSlice";
+import authStyles from '@/features/auth/pages/AuthPages.module.css';
+import {LoaderIcon} from "@/features/auth/components/icons/LoaderIcon";
+import { MESSAGES } from "@/constants/messages";
+import { LABELS } from "@/constants/labels";
+import { TEXT } from "@/constants/text-constants";
 
 const schema = yup.object().shape({
     email: yup.string().required(MESSAGES.EMAIL_REQUIRED).email(MESSAGES.INVALID_EMAIL),

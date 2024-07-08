@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import UserMenu from '../components/UserMenu/UserMenu';
-import { auth } from '../../../shared/lib/firebase';
+import UserMenu from '@/features/auth/components/UserMenu/UserMenu';
+import { auth } from '@/shared/lib/firebase';
 import styles from './AuthPages.module.css';
-import {logout} from '../authSlice';
+import {logout} from '@/features/auth/authSlice';
 
 const UserPage = () => {
     const {id} = useParams();

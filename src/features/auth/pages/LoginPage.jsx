@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 
-import LoginForm from '../components/LoginForm/LoginForm';
+import LoginForm from '@/features/auth/components/LoginForm/LoginForm';
 import styles from './AuthPages.module.css';
-import { TEXT } from '../../../constants/text-constants';
-import { resetAuthStatus } from '../authSlice';
+import { TEXT } from '@/constants/text-constants';
+import { resetAuthStatus } from '@/features/auth/authSlice';
 
 const LoginPage = () => {
     const dispatch = useDispatch();

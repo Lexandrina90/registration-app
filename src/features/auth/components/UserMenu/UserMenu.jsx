@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import cn from 'classnames';
 
-import { TEXT } from '../../../../constants/text-constants';
+import { TEXT } from '@/constants/text-constants';
 import styles from './UserMenu.module.css';
-import { SettingsIcon } from '../icons/SettingsIcon';
-import { LogOutIcon } from '../icons/LogOutIcon';
+import { SettingsIcon } from '@/features/auth/components/icons/SettingsIcon';
+import { LogOutIcon } from '@/features/auth/components/icons/LogOutIcon';
 
 const UserMenu = ({uid, onLogout}) => {
     return (

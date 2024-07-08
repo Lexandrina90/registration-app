@@ -4,11 +4,11 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 
-import ChangeDataForm from '../components/ChangeDataForm/ChangeDataForm';
+import ChangeDataForm from '@/features/auth/components/ChangeDataForm/ChangeDataForm';
 import styles from './AuthPages.module.css';
-import { TEXT } from '../../../constants/text-constants';
-import { auth } from '../../../shared/lib/firebase';
-import { logout, resetAuthStatus } from '../authSlice';
+import { TEXT } from '@/constants/text-constants';
+import { auth } from '@/shared/lib/firebase';
+import { logout, resetAuthStatus } from '@/features/auth/authSlice';
 
 const ChangeDataPage = () => {
     const dispatch = useDispatch();

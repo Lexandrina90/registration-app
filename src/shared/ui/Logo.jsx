@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/images/logo.svg';
+import logo from '@/shared/assets/images/logo.svg';
 
 const Logo = ({ className }) => {
     return <img src={logo} alt="Logo" className={className} />;

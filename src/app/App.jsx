@@ -3,9 +3,9 @@ import { Provider } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { store } from "./store";
-import AuthRoutes from "../processes/auth/AuthRoutes";
-import Logo from "../shared/ui/Logo";
-import styles from '../shared/styles/common.module.css';
+import AuthRoutes from '@/processes/auth/AuthRoutes';
+import Logo from "@/shared/ui/Logo";
+import styles from '@/shared/styles/common.module.css';
 
 
 function App() {

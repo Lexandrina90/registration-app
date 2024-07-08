@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {auth} from '../../shared/lib/firebase';
+import {auth} from '@/shared/lib/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail, updatePassword} from 'firebase/auth';
 
 const getUserData = (user) => ({
